@@ -1,0 +1,11 @@
+postgres:
+  username: postgres
+  password: H@mmas2022
+
+# smtp:
+#   user_name: my-smtp-user
+#   password: my-smtp-password
+#
+# aws:
+#   access_key_id: 123
+#   secret_access_key: 345
