@@ -1,5 +1,5 @@
 class Api::V1::DoctorsController < ApplicationController
-  before_action :set_doctor, only: [ :show, :update, :delete ]
+  before_action :set_doctor, only: [ :show, :update, :destroy ]
 
   def index
     doctors = Doctor.all
@@ -31,7 +31,7 @@ class Api::V1::DoctorsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     if @doctor.destroy
       render json: {message: "Doctor successfully delete", status: :ok}
     else
