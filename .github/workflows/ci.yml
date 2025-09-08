@@ -22,11 +22,12 @@ jobs:
       - name: Make bin scripts executable
         run: chmod +x bin/*
 
-      - name: Scan for Rails security vulnerabilities using Brakeman
+      - name: Scan for Rails security vulnerabilities
         run: bundle exec brakeman --no-pager
 
   lint:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -40,5 +41,5 @@ jobs:
       - name: Make bin scripts executable
         run: chmod +x bin/*
 
-      - name: Lint code for consistent style using RuboCop
+      - name: Lint Ruby code
         run: bundle exec rubocop -f github
