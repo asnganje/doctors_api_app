@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   namespace :api do
     namespace :v1 do
+      devise_for :users,
+        controllers: {
+          registrations: 'api/v1/users/registrations',
+          sessions: 'api/v1/users/sessions'
+        },
+        defaults: { format: :json}
       resources :doctors
     end
   end
