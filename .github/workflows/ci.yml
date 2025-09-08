@@ -19,11 +19,15 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Scan for common Rails security vulnerabilities using static analysis
-        run: bin/brakeman --no-pager
+      - name: Make bin scripts executable
+        run: chmod +x bin/*
+
+      - name: Scan for Rails security vulnerabilities
+        run: bundle exec brakeman --no-pager
 
   lint:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -34,6 +38,8 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Lint code for consistent style
-        run: bin/rubocop -f github
+      - name: Make bin scripts executable
+        run: chmod +x bin/*
 
+      - name: Lint Ruby code
+        run: bundle exec rubocop -f github
