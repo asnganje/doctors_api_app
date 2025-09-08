@@ -10,7 +10,7 @@ class Api::V1::DoctorsController < ApplicationController
     if @doctor
       render json: @doctor
     else
-      render json: { error:"Doctor not found!" }
+      render json: { error: "Doctor not found!" }
     end
   end
 
@@ -19,7 +19,7 @@ class Api::V1::DoctorsController < ApplicationController
     if doctor.save
       render json: doctor, status: :created
     else
-      render json: { errors: doctor.errors.full_messages}, status: :unprocessable_entity 
+      render json: { errors: doctor.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -27,15 +27,15 @@ class Api::V1::DoctorsController < ApplicationController
     if @doctor.update(doctor_params)
       render json: @doctor, status: :ok
     else
-      render json: {errors: @doctor.errors.full_messages, status: :unprocessable_entity}
+      render json: { errors: @doctor.errors.full_messages, status: :unprocessable_entity }
     end
   end
 
   def destroy
     if @doctor.destroy
-      render json: {message: "Doctor successfully delete", status: :ok}
+      render json: { message: "Doctor successfully delete", status: :ok }
     else
-      render json: { error: "Failed to delete doctor", status: :unprocessable_entity}
+      render json: { error: "Failed to delete doctor", status: :unprocessable_entity }
     end
   end
 
