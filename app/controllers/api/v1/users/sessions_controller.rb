@@ -6,11 +6,11 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   private
 
   def respond_with(resource, _opts = {})
-    render json: { message: "Logged in successfully", user: resource}, status: :ok
+    render json: { message: "Logged in successfully", user: resource }, status: :ok
   end
 
    def respond_to_on_destroy(resource, _opts = {})
-    render json: { message: "Logged out successfully", user: resource}, status: :ok
+    render json: { message: "Logged out successfully", user: resource }, status: :ok
   end
   # before_action :configure_sign_in_params, only: [:create]
 
