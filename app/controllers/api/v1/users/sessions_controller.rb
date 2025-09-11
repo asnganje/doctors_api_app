@@ -4,11 +4,10 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
     respond_to :json
     
     skip_before_action :verify_signed_out_user, only: :destroy
-    # skip_before_action :authenticate_user!, only: [:destroy]
 
     def create
-    user_params = params.require(:user).permit(:email, :password)
-    user = User.find_by(email: user_params[:email])
+      user_params = params.require(:user).permit(:email, :password)
+      user = User.find_by(email: user_params[:email])
 
     if user&.valid_password?(user_params[:password])
       token = Warden::JWTAuth::UserEncoder.new.call(user, :user, nil).first
@@ -29,8 +28,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   def respond_to_on_destroy
     auth_header = request.headers['Authorization']
 
-  if auth_header.present?
-    token = auth_header.split(' ').last
+    if auth_header.present?
+      token = auth_header.split(' ').last
 
     begin
       # Decode JWT
