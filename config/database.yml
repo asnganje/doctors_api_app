@@ -89,6 +89,7 @@ production:
   primary: &primary_production
     <<: *default
     url: <%= ENV['DATABASE_URL'] %>
+    schema_search_path: doctors,public
     pool: 5
     timeout: 5000
     # database: doctors_api_app_production
