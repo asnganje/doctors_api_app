@@ -31,47 +31,27 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
     if auth_header.present?
       token = auth_header.split(' ').last
 
-    begin
-      # Decode JWT
-      payload = Warden::JWTAuth::TokenDecoder.new.call(token)
-      jti     = payload['jti']
-      exp     = Time.at(payload['exp'])
+      begin
+        # Decode JWT
+        payload = Warden::JWTAuth::TokenDecoder.new.call(token)
+        jti     = payload['jti']
+        exp     = Time.at(payload['exp'])
 
-      # Check denylist
-      if JwtDenylist.exists?(jti: jti)
-        render json: { error: "Invalid or already logged out token" }, status: :unauthorized
-      else
-        JwtDenylist.create!(jti: jti, exp: exp)
-        render json: { message: "Logged out successfully" }, status: :ok
+        # Check denylist
+        if JwtDenylist.exists?(jti: jti)
+          render json: { error: "Invalid or already logged out token" }, status: :unauthorized
+        else
+          JwtDenylist.create!(jti: jti, exp: exp)
+          render json: { message: "Logged out successfully" }, status: :ok
+        end
+      rescue JWT::ExpiredSignature
+        render json: {error:"Token has expired"}, status: :unauthorized 
+      rescue => e
+        Rails.logger.error "Unexpected JWT error #{e.message}"
+        render json: {error: "Something went wrong"}, status: :unauthorized
       end
-    rescue JWT::DecodeError, JWT::VerificationError
-      render json: { error: "Invalid token" }, status: :unauthorized
-    end
     else
       render json: { error: "No token provided" }, status: :unauthorized
     end
   end
-  # before_action :configure_sign_in_params, only: [:create]
-
-  # GET /resource/sign_in
-  # def new
-  #   super
-  # end
-
-  # POST /resource/sign_in
-  # def create
-  #   super
-  # end
-
-  # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
-
-  # protected
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
 end
