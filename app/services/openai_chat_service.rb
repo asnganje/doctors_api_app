@@ -3,21 +3,22 @@ require "openai"
 class OpenaiChatService
   def initialize(prompt)
     @prompt = prompt
-    @client = OpenAI::Client.new(access_token: ENV['OPEN_AI_API_KEY'])    
+    @client = OpenAI::Client.new(access_token: Rails.application.credentials[:OPEN_AI_API_KEY])    
   end
   def call
     response = @client.chat(
       parameters: {
         model: "gpt-4o-mini",
         messages: [
-          {role: "System", 
+          {role: "system", 
           content: "You are a helpful virtual health assistant. Provide general medical guidance, but do not give exact diagnoses or prescriptions."
           },
           {
-            role: "User",
+            role: "user",
             content: @prompt
           }
         ],
+        max_tokens: 70,
         temperature: 0.7
       }
     )
