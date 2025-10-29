@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         },
         defaults: { format: :json }
       resources :doctors
+      post "ai_chat", to: "ai_chats#create"
     end
   end
 end
