@@ -17,7 +17,7 @@ class OpenaiChatService
             content: @prompt
           }
         ],
-        max_completion_tokens: 70,
+        max_tokens: 70,
         temperature: 0.7
     )
     response.dig("choices", 0, "message", "content")
