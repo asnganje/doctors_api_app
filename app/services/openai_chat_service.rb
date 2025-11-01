@@ -6,7 +6,7 @@ class OpenaiChatService
     @client = OPENAI_CLIENT
   end
   def call
-    response = @client.chat(
+    response = @client.chat.completions(
       parameters: {
         model: "gpt-4o-mini",
         messages: [
@@ -18,7 +18,7 @@ class OpenaiChatService
             content: @prompt
           }
         ],
-        max_tokens: 70,
+        max_completion_tokens: 70,
         temperature: 0.7
       }
     )
