@@ -7,7 +7,6 @@ class OpenaiChatService
   end
   def call
     response = @client.chat.completions.create(
-      parameters: {
         model: "gpt-4o-mini",
         messages: [
           {role: "system", 
@@ -20,9 +19,7 @@ class OpenaiChatService
         ],
         max_completion_tokens: 70,
         temperature: 0.7
-      }
     )
-    Rails.logger.info "🔍 OpenAI Raw Response: #{response.inspect}"
     response.dig("choices", 0, "message", "content")
   end
 end
