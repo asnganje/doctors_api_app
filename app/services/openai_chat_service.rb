@@ -3,7 +3,7 @@ require "openai"
 class OpenaiChatService
   def initialize(prompt)
     @prompt = prompt
-    @client = OpenAI::Client.new(access_token: Rails.application.credentials[:OPEN_AI_API_KEY])    
+    @client = OpenAI::Client.new(access_token: Rails.application.credentials.openai[:api_key])    
   end
   def call
     response = @client.chat(
