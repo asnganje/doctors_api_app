@@ -6,7 +6,7 @@ class OpenaiChatService
     @client = OPENAI_CLIENT
   end
   def call
-    response = @client.chat.completions.create(
+    response = @client.chat(
         model: "gpt-4o-mini",
         messages: [
           {role: "system", 
