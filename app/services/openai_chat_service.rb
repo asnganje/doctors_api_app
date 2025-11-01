@@ -22,6 +22,7 @@ class OpenaiChatService
         temperature: 0.7
       }
     )
+    Rails.logger.info "🔍 OpenAI Raw Response: #{response.inspect}"
     response.dig("choices", 0, "message", "content")
   end
 end
