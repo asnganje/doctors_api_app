@@ -6,7 +6,7 @@ class OpenaiChatService
     @client = OPENAI_CLIENT
   end
   def call
-    response = @client.chat.completions(
+    response = @client.chat.completions.create(
       parameters: {
         model: "gpt-4o-mini",
         messages: [
@@ -22,7 +22,6 @@ class OpenaiChatService
         temperature: 0.7
       }
     )
-    puts "nganje #{response}"
     response.dig("choices", 0, "message", "content")
   end
 end
