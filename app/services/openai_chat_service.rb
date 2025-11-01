@@ -7,6 +7,7 @@ class OpenaiChatService
   end
   def call
     response = @client.chat(
+      parameters: {
         model: "gpt-4o-mini",
         messages: [
           {role: "system", 
@@ -19,6 +20,7 @@ class OpenaiChatService
         ],
         max_tokens: 70,
         temperature: 0.7
+      }
     )
     response.dig("choices", 0, "message", "content")
   end
