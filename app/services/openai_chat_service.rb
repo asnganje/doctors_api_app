@@ -3,7 +3,7 @@ require "openai"
 class OpenaiChatService
   def initialize(prompt)
     @prompt = prompt
-    @client = OPENAI_CLIENT
+    @client = OpenaiClient.client
   end
   def call
     response = @client.chat(
