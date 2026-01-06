@@ -10,7 +10,7 @@ class Api::V1::DoctorsController < ApplicationController
     if @doctor
       render json: @doctor
     else
-      render json: { error: "Doctor has not been found!" }
+      render json: { error: "Doctor not found!" }
     end
   end
 
