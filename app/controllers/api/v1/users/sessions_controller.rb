@@ -32,12 +32,9 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
       token = auth_header.split(' ').last
 
       begin
-        # Decode JWT
         payload = Warden::JWTAuth::TokenDecoder.new.call(token)
         jti     = payload['jti']
         exp     = Time.at(payload['exp'])
-
-        # Check denylist
         if JwtDenylist.exists?(jti: jti)
           render json: { error: "Invalid or already logged out token" }, status: :unauthorized
         else
