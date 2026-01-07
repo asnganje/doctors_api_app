@@ -1,9 +1,19 @@
 FROM ruby:3.3-alpine
 
-RUN apk add --no-cache build-base postgresql-dev git
+# Install dependencies needed for building gems like psych
+RUN apk add --no-cache \
+    build-base \
+    postgresql-dev \
+    git \
+    libyaml-dev \
+    yaml-dev \
+    readline-dev \
+    bash
 
 WORKDIR /app
 COPY Gemfile Gemfile.lock ./
+
+# Install gems
 RUN bundle install --without development test
 
 COPY . .
