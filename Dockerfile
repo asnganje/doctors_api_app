@@ -47,4 +47,4 @@ RUN groupadd --system --gid 1000 rails && \
 USER rails
 
 # Start Rails at runtime: first prepare DB, then run server
-CMD ["sh", "-c", "bin/rails db:prepare && bin/rails server -b 0.0.0.0"]
+CMD ["sh", "-c", "until bin/rails db:prepare; do echo 'Waiting for DB...'; sleep 2; done && bin/rails server -b 0.0.0.0"]
