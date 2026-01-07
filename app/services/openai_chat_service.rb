@@ -1,27 +1,27 @@
-# require "openai"
+require "openai"
 
-# class OpenaiChatService
-#   def initialize(prompt)
-#     @prompt = prompt
-#     @client = OPENAI_CLIENT
-#   end
-#   def call
-#     response = @client.chat(
-#       parameters: {
-#         model: "gpt-4o-mini",
-#         messages: [
-#           {role: "system", 
-#           content: "You are a helpful virtual health assistant. Provide general medical guidance, but do not give exact diagnoses or prescriptions."
-#           },
-#           {
-#             role: "user",
-#             content: @prompt
-#           }
-#         ],
-#         max_tokens: 70,
-#         temperature: 0.7
-#       }
-#     )
-#     response.dig("choices", 0, "message", "content")
-#   end
-# end
+class OpenaiChatService
+  def initialize(prompt)
+    @prompt = prompt
+    @client = OPENAI_CLIENT
+  end
+  def call
+    response = @client.chat(
+      parameters: {
+        model: "gpt-4o-mini",
+        messages: [
+          {role: "system", 
+          content: "You are a helpful virtual health assistant. Provide general medical guidance, but do not give exact diagnoses or prescriptions."
+          },
+          {
+            role: "user",
+            content: @prompt
+          }
+        ],
+        max_tokens: 70,
+        temperature: 0.7
+      }
+    )
+    response.dig("choices", 0, "message", "content")
+  end
+end
