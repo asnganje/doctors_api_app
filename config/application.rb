@@ -1,7 +1,7 @@
 require_relative "boot"
 
 # Allow Rails to boot during Railway build without real secrets
-ENV["SECRET_KEY_BASE"] ||= "dummy" if ENV["RAILWAY_ENV"] == "build"
+ENV["SECRET_KEY_BASE"] ||= "dummy"
 
 require "rails"
 # Pick the frameworks you want:
