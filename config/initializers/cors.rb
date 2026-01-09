@@ -8,19 +8,9 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins "https://doctors-frontend-i725.onrender.com", "http://localhost:5173"
-
     resource "*",
       headers: :any,
       expose: ['Authorization', 'Content-Type'],
-      methods: [:get, :post, :put, :patch, :delete, :options, :head],
-      credentials: true
-  end
-  allow do
-    # 🔑 Allow your production frontend (example: Render/Netlify/Vercel)
-    origins "https://your-frontend-domain.com"
-
-    resource "*",
-      headers: :any,
       methods: [:get, :post, :put, :patch, :delete, :options, :head],
       credentials: true
   end
