@@ -18,7 +18,7 @@ COPY . .
 
 ENV RAILS_ENV=production
 ENV RACK_ENV=production
-ENV PORT=8080  # Ensure Railway port matches Puma
+ENV PORT=8080
 
 EXPOSE 8080
 
