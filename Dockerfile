@@ -23,5 +23,4 @@ ENV PORT=8080  # Ensure Railway port matches Puma
 
 EXPOSE 8080
 
-# Run migrations first, then start Puma
 CMD ["sh", "-c", "bundle exec rails db:migrate && bundle exec puma -C config/puma.rb -b 0.0.0.0 -p $PORT"]
