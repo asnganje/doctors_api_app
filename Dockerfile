@@ -1,6 +1,5 @@
 FROM ruby:3.3-alpine
 
-# Install dependencies needed for native gems
 RUN apk add --no-cache \
     build-base \
     postgresql-dev \
