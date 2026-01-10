@@ -84,6 +84,4 @@ Rails.application.configure do
   #
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
-  config.solid_queue.dispatcher_options = { polling_interval: 10.seconds }
-  config.solid_queue.worker_options = { polling_interval: 5.seconds }
 end
